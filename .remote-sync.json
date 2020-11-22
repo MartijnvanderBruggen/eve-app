@@ -6,13 +6,13 @@
   "useAtomicWrites": false,
   "deleteLocal": false,
   "hostname": "192.168.10.10",
-  "target": "projects/eve-app",
+  "target": "/home/projects/eve-app",
   "ignore": [
     ".remote-sync.json",
     ".git/**"
   ],
   "username": "vagrant",
-  "keyfile": "C:\\Users\\marti\\.ssh",
   "watch": [],
-  "transport": "scp"
+  "transport": "scp",
+  "password": "vagrant"
 }

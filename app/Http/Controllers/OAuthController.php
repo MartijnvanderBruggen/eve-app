@@ -67,9 +67,9 @@ class OAuthController extends BaseController
     protected function loginUser(User $user) {
       Auth::login($user);
       if(Auth::check($user)){
-        return redirect()->to('/dashboard')->with('message', 'Thank you for updating your billing information.');
+        return redirect()->to('/dashboard')->with('message', 'Thank you .');
       } else {
-        dd('an error occurred');
+        dd('an error occurred meh');
       }
     }
     /**
