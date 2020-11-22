@@ -15,5 +15,5 @@
   "watch": [],
   "transport": "scp",
   "port": "22",
-  "keyfile": "C:\\Users\\marti\\.ssh\\id_rsa"
+  "password": "vagrant"
 }

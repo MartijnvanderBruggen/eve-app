@@ -69,7 +69,7 @@ class OAuthController extends BaseController
       if(Auth::check($user)){
         return redirect()->to('/dashboard')->with('message', 'Thank you .');
       } else {
-        dd('an error occurred meh');
+        dd('an error occurred meeh');
       }
     }
     /**
