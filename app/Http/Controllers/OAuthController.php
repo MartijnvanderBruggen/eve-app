@@ -40,7 +40,11 @@ class OAuthController extends BaseController
               'code' => $request->query('code'),
         ]);
         $this->exChangeUserInfo($response);
-
+        if(Auth::check(Auth::user())){
+          return redirect()->route('dashboard');
+        } else {
+          return redirect()->route('error');
+        }
     }
 
     protected function exChangeUserInfo($response) {
@@ -66,11 +70,6 @@ class OAuthController extends BaseController
 
     protected function loginUser(User $user) {
       Auth::login($user);
-      if(Auth::check($user)){
-        return redirect()->to('/dashboard')->with('message', 'Thank you .');
-      } else {
-        dd('an error occurred meeh');
-      }
     }
     /**
      * Refreshes the Access Token, using the refresh_token.
