@@ -5,15 +5,10 @@
   "uploadOnSave": true,
   "useAtomicWrites": false,
   "deleteLocal": false,
-  "hostname": "192.168.10.10",
-  "target": "/home/vagrant/projects/eve-app",
   "ignore": [
     ".remote-sync.json",
     ".git/**"
   ],
-  "username": "vagrant",
   "watch": [],
-  "transport": "scp",
-  "port": "21",
-  "password": "vagrant"
+  "transport": "ftp"
 }
