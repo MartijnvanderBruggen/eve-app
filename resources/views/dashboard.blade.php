@@ -2,6 +2,6 @@
 
 @section('content')
 
-<h1>logged in</h1>
+<x-character-assets/>
 
 @stop
