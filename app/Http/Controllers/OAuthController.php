@@ -69,7 +69,6 @@ class OAuthController extends BaseController
       } else {
         $user = User::where('eve_id', $characterInfo['CharacterID'])->first();
       }
-
       $this->loginUser($user);
     }
 
