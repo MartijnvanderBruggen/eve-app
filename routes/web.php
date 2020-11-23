@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use App\Models\User as User;
 use App\Http\Controllers\OAuthController;
+use App\Http\Controllers\DashboardController;
   // code...
 
 
