@@ -14,6 +14,6 @@
   "username": "vagrant",
   "watch": [],
   "transport": "scp",
-  "port": "22",
+  "port": "21",
   "password": "vagrant"
 }
