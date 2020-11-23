@@ -59,17 +59,29 @@ class OAuthController extends BaseController
 
     protected function createUser($characterInfo, $token) {
 
-      $user = new User;
-      $user->eve_id = $characterInfo['CharacterID'];
-      $user->name = $characterInfo['CharacterName'];
-      $user->expires = $characterInfo['ExpiresOn'];
-      $user->password = $token;
-      $user->save();
+      if(!$this->characterExists($characterInfo)) {
+        $user = new User;
+        $user->eve_id = $characterInfo['CharacterID'];
+        $user->name = $characterInfo['CharacterName'];
+        $user->expires = $characterInfo['ExpiresOn'];
+        $user->password = $token;
+        $user->save();
+      } else {
+        $user = User::where('eve_id', $characterInfo['CharacterID'])->first();
+      }
       $this->loginUser($user);
     }
 
     protected function loginUser(User $user) {
       Auth::login($user);
+    }
+
+    protected function characterExists($character) {
+      if(User::where('eve_id', $character['CharacterID'])->first() !== null) {
+        return true;
+      } else {
+        return false;
+      }
     }
     /**
      * Refreshes the Access Token, using the refresh_token.
