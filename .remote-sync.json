@@ -10,5 +10,10 @@
     ".git/**"
   ],
   "watch": [],
-  "transport": "ftp"
+  "transport": "scp",
+  "port": "22",
+  "hostname": "192.168.10.10",
+  "target": "/home/projects/eve-app",
+  "username": "vagrant",
+  "password": "vagrant"
 }
