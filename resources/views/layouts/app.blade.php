@@ -12,12 +12,10 @@
   <body>
     @yield('content')
     <script src="js/app.js"></script>
-    
+
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
-    </script>
+    
     @stack('scripts')
   </body>
 </html>
