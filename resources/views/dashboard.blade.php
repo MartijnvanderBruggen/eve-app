@@ -7,5 +7,5 @@
 @stop
 
 @push('scripts')
-    <script src="dashboard.js"></script>
+    <script src="js/dashboard.js"></script>
 @endpush
