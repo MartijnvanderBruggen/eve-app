@@ -19,6 +19,6 @@ class DashboardController extends BaseController
 
     $assets = collect(json_decode($responseJSON->body()));
 
-    return view('dashboard',['assets' => $assets]);
+    return response()->json(['assets' => $assets]);
   }
 }
