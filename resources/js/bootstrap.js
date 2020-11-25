@@ -12,7 +12,7 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import bulma from 'bulma';
-import vue from 'vue';
+import Vue from 'vue';
 
 
 /**
