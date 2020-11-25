@@ -104,7 +104,7 @@ console.log('testing 123');
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/vagrant/projects/eve-app/resources/js/dashboard.js */"./resources/js/dashboard.js");
+module.exports = __webpack_require__(/*! C:\Users\marti\Documents\GitHub\eve-app\resources\js\dashboard.js */"./resources/js/dashboard.js");
 
 
 /***/ })
