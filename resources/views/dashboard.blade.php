@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
-<button type="button" class="success button">Refresh assets</button>
-
+<div id="app">
+  <get-assets></get-assets>
+</div>
 @stop
 
 @push('scripts')
