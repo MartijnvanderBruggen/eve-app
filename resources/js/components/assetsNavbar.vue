@@ -11,10 +11,6 @@
 <script>
 export default {
   name: 'AssetsNavbar',
-  data : function() {
-      return {
-        test: 'test'
-      }
-  }
+  
 }
 </script>

@@ -1,8 +1,7 @@
 <template>
  <div class="assets-component">
-  {{ test }}
   <AssetsNavbar/>
-  <AssetsTable/>
+  <AssetsTable :user="user"/>
  </div>
 </template>
 
@@ -15,14 +14,11 @@ import AssetsNavbar from './AssetsNavbar.vue'
 import AssetsTable from './AssetsTable.vue'
 
 export default {
-  name: 'Assets',
-  data : function() {
-      return {
-        test: 'test'
-      }
-  },
   components: {
-    AssetsNavbar, AssetsTable
-  }
+    AssetsNavbar,
+    AssetsTable
+  },
+  name:'Assets',
+  props: ['user'],
 }
 </script>

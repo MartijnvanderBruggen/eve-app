@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends BaseController
 {
   public function index() {
-    // $user = Auth::user();
+    $user = Auth::user();
     //
     // $responseJSON = Http::withHeaders([
     //     'Authorization' => 'Bearer '. $user->password,
@@ -19,6 +19,6 @@ class DashboardController extends BaseController
     //
     // $assets = collect(json_decode($responseJSON->body()));
 
-    return view('dashboard');
+    return view('dashboard',['user' => $user]);
   }
 }

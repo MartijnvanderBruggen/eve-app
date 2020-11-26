@@ -2,13 +2,9 @@
 
 @section('content')
 <div id="app">
-  <Assets>
-    <AssetsNavbar/>
-    <AssetsTable/>
+  <Assets :user='{!!json_encode($user)!!}'>
+    <AssetsNavbar></AssetsNavbar>
+    <AssetsTable></AssetsTable>
   </Assets>
 </div>
-@stop
-
-@push('scripts')
-    <script src="js/dashboard.js"></script>
-@endpush
+@endsection
