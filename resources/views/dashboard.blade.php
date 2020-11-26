@@ -2,10 +2,10 @@
 
 @section('content')
 <div id="app">
-  <assets>
-    <assets-navbar></assets-navbar>
-    <assets-table></assets-table>
-  </assets>
+  <Assets>
+    <AssetsNavbar/>
+    <AssetsTable/>
+  </Assets>
 </div>
 @stop
 
