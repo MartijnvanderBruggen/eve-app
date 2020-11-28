@@ -1,6 +1,6 @@
 <template>
   <div class="assets-table">
-    <table><tr><td>{{ user.eve_id }}</td><td>{{ user.name }}</td></tr></table>
+    <table><tr><td v-for="asset in assets">{{ asset }}</td></tr></table>
   </div>
 </template>
 
@@ -16,22 +16,35 @@ export default {
   name: 'AssetsTable',
   props: {
   	user: {
-      type: String,
+      type: Object,
   	},
+    eve_token: {
+      type: String
+    }
   },
 
   data : function() {
       return {
         assets: '',
+        filteredAssets: ''
       }
   },
   mounted() {
+    this.$root.$on('loadDatatableEvent', data => {
+        this.loadDatatable()
+    });
 
-    axios.get('https://esi.evetech.net/latest/characters/'+user.eve_id+'/assets/',{
-      headers: {
-        'Authorization': 'Bearer '+user.password
-      }
-    }).then(response => (this.assets = response))
+  },
+  methods: {
+    loadDatatable: function() {
+      axios.get('https://esi.evetech.net/latest/characters/'+this.user.eve_id+'/assets/',{
+        headers: {
+          'Authorization': 'Bearer '+this.eve_token
+        }
+      }).then(response => {
+          this.assets = response.data
+      })
+    }
   }
 
 }

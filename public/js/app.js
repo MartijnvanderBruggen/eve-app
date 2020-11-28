@@ -1929,7 +1929,7 @@ __webpack_require__.r(__webpack_exports__);
     AssetsTable: _AssetsTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   name: 'Assets',
-  props: ['user']
+  props: ['user', 'eve_token']
 });
 
 /***/ }),
@@ -1954,7 +1954,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'AssetsNavbar'
+  name: 'AssetsNavbar',
+  methods: {
+    loadDatatable: function loadDatatable() {
+      this.$root.$emit('loadDatatableEvent', 'loadDataTable');
+    }
+  }
 });
 
 /***/ }),
@@ -1988,24 +1993,37 @@ __webpack_require__.r(__webpack_exports__);
   name: 'AssetsTable',
   props: {
     user: {
+      type: Object
+    },
+    eve_token: {
       type: String
     }
   },
   data: function data() {
     return {
-      assets: ''
+      assets: '',
+      filteredAssets: ''
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('https://esi.evetech.net/latest/characters/' + user.eve_id + '/assets/', {
-      headers: {
-        'Authorization': 'Bearer ' + user.password
-      }
-    }).then(function (response) {
-      return _this.assets = response;
+    this.$root.$on('loadDatatableEvent', function (data) {
+      _this.loadDatatable();
     });
+  },
+  methods: {
+    loadDatatable: function loadDatatable() {
+      var _this2 = this;
+
+      axios.get('https://esi.evetech.net/latest/characters/' + this.user.eve_id + '/assets/', {
+        headers: {
+          'Authorization': 'Bearer ' + this.eve_token
+        }
+      }).then(function (response) {
+        _this2.assets = response.data;
+      });
+    }
   }
 });
 
@@ -31194,7 +31212,7 @@ var render = function() {
     [
       _c("AssetsNavbar"),
       _vm._v(" "),
-      _c("AssetsTable", { attrs: { user: _vm.user } })
+      _c("AssetsTable", { attrs: { user: _vm.user, eve_token: _vm.eve_token } })
     ],
     1
   )
@@ -31221,18 +31239,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "assets-navbar" }, [
-      _c("button", { staticClass: "button" }, [_vm._v("Load Assets")])
+  return _c("div", { staticClass: "assets-navbar" }, [
+    _c("button", { staticClass: "button", on: { click: _vm.loadDatatable } }, [
+      _vm._v("Load Assets")
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -31256,10 +31269,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "assets-table" }, [
     _c("table", [
-      _c("tr", [
-        _c("td", [_vm._v(_vm._s(_vm.user.eve_id))]),
-        _c("td", [_vm._v(_vm._s(_vm.user.name))])
-      ])
+      _c(
+        "tr",
+        _vm._l(_vm.assets, function(asset) {
+          return _c("td", [_vm._v(_vm._s(asset))])
+        }),
+        0
+      )
     ])
   ])
 }
@@ -43504,8 +43520,8 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); //window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

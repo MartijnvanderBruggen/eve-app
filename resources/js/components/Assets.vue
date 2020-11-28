@@ -1,7 +1,7 @@
 <template>
  <div class="assets-component">
   <AssetsNavbar/>
-  <AssetsTable :user="user"/>
+  <AssetsTable :user="user" :eve_token="eve_token"/>
  </div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
     AssetsTable
   },
   name:'Assets',
-  props: ['user'],
+  props: ['user','eve_token'],
+  
 }
 </script>

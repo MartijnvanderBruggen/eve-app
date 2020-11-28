@@ -1,6 +1,6 @@
 <template>
   <div class="assets-navbar">
-    <button class="button">Load Assets</button>
+    <button class="button" @click="loadDatatable">Load Assets</button>
   </div>
 </template>
 
@@ -11,6 +11,11 @@
 <script>
 export default {
   name: 'AssetsNavbar',
-  
+  methods: {
+    loadDatatable : function() {
+      this.$root.$emit('loadDatatableEvent','loadDataTable')
+    }
+  }
+
 }
 </script>

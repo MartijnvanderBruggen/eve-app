@@ -54,6 +54,7 @@ class OAuthController extends BaseController
       $character = Http::withHeaders(['Authorization' => 'Bearer '.$tokens['access_token']])->get('https://login.eveonline.com/oauth/verify');
       $characterInfo = collect(json_decode($character->body()));
       $this->createUser($characterInfo, $tokens['access_token']);
+      session(['eve_token' => $tokens['access_token']]);
 
     }
 

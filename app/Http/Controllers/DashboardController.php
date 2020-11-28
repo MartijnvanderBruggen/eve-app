@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends BaseController
 {
-  public function index() {
+  public function index(Request $request) {
     $user = Auth::user();
     //
     // $responseJSON = Http::withHeaders([
@@ -18,7 +18,10 @@ class DashboardController extends BaseController
     // ])->get('https://esi.evetech.net/latest/characters/'.$user->eve_id.'/assets/');
     //
     // $assets = collect(json_decode($responseJSON->body()));
-
-    return view('dashboard',['user' => $user]);
+    $token = $request->session()->pull('eve_token');
+    return view('dashboard',[
+      'user' => $user,
+      'eve_token' => $token
+    ]);
   }
 }
