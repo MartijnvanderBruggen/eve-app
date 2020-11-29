@@ -3,7 +3,7 @@
     <vuetable ref="vuetable"
     :fields = "fieldsDef"
     :api-mode="false"
-    :data = "eveData"></vuetable>
+    :data ="eveData"></vuetable>
   </div>
 </template>
 
