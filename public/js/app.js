@@ -1985,6 +1985,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1995,14 +1998,29 @@ __webpack_require__.r(__webpack_exports__);
     user: {
       type: Object
     },
+    data: {
+      type: Object
+    },
     eve_token: {
       type: String
     }
   },
   data: function data() {
     return {
-      assets: '',
-      filteredAssets: ''
+      eveData: '',
+      fieldsDef: [{
+        title: 'ID',
+        name: 'item_id',
+        sortField: 'item_id'
+      }, {
+        title: 'Location',
+        name: 'location_id',
+        sortField: 'location_id'
+      }, {
+        title: 'Quantity',
+        name: 'quantity',
+        sortField: 'quantity'
+      }]
     };
   },
   mounted: function mounted() {
@@ -2021,7 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
           'Authorization': 'Bearer ' + this.eve_token
         }
       }).then(function (response) {
-        _this2.assets = response.data;
+        _this2.eveData = response.data;
       });
     }
   }
@@ -31267,17 +31285,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "assets-table" }, [
-    _c("table", [
-      _c(
-        "tr",
-        _vm._l(_vm.assets, function(asset) {
-          return _c("td", [_vm._v(_vm._s(asset))])
-        }),
-        0
-      )
-    ])
-  ])
+  return _c(
+    "div",
+    { staticClass: "assets-table" },
+    [
+      _c("vuetable", {
+        ref: "vuetable",
+        attrs: { fields: _vm.fieldsDef, "api-mode": false, data: _vm.eveData }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

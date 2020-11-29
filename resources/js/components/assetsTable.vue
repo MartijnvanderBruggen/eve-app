@@ -1,6 +1,9 @@
 <template>
   <div class="assets-table">
-    <table><tr><td v-for="asset in assets">{{ asset }}</td></tr></table>
+    <vuetable ref="vuetable"
+    :fields = "fieldsDef"
+    :api-mode="false"
+    :data = "eveData"></vuetable>
   </div>
 </template>
 
@@ -18,17 +21,36 @@ export default {
   	user: {
       type: Object,
   	},
+    data: {
+      type: Object
+    },
     eve_token: {
       type: String
+    },
+  },
+  data: function () {
+    return {
+      eveData: '',
+      fieldsDef: [
+        {
+          title: 'ID',
+          name: 'item_id',
+          sortField: 'item_id'
+        },
+        {
+          title: 'Location',
+          name: 'location_id',
+          sortField: 'location_id'
+        },
+        {
+          title: 'Quantity',
+          name: 'quantity',
+          sortField: 'quantity'
+        }
+      ]
     }
   },
 
-  data : function() {
-      return {
-        assets: '',
-        filteredAssets: ''
-      }
-  },
   mounted() {
     this.$root.$on('loadDatatableEvent', data => {
         this.loadDatatable()
@@ -42,7 +64,7 @@ export default {
           'Authorization': 'Bearer '+this.eve_token
         }
       }).then(response => {
-          this.assets = response.data
+          this.eveData = response.data
       })
     }
   }
