@@ -30,7 +30,7 @@ export default {
   },
   data: function () {
     return {
-      eveData: '',
+      eveData: {},
       fieldsDef: [
         {
           title: 'ID',

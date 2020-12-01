@@ -1,11 +1,14 @@
 require('./bootstrap');
-let Vue;
-Vue = require('vue');
-import Assets from './components/Assets';
-import AssetsNavbar from './components/AssetsNavbar.vue';
-import AssetsTable from './components/AssetsTable.vue';
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+import routes from './routes.js'
+import EveAppDashboard from './components/EveAppDashboard.vue'
 
 new Vue({
   el: "#app",
-  components: { Assets, AssetsTable, AssetsNavbar }
+  components: {EveAppDashboard},
+  router: new VueRouter(routes)
 })

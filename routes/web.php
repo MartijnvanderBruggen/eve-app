@@ -21,14 +21,8 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/{any?}', function () {
+    return view('dashboard');
 });
 
 Route::get('callback', [OAuthController::class,'callback']);
-
-Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
-
-Route::get('/error', function () {
-    return view('error');
-})->name('error');

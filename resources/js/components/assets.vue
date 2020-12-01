@@ -20,6 +20,6 @@ export default {
   },
   name:'Assets',
   props: ['user','eve_token'],
-  
+
 }
 </script>

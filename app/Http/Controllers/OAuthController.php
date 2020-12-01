@@ -40,11 +40,7 @@ class OAuthController extends BaseController
               'code' => $request->query('code'),
         ]);
         $this->exChangeUserInfo($response);
-        if(Auth::check(Auth::user())){
-          return redirect()->route('dashboard');
-        } else {
-          return redirect()->route('error');
-        }
+        return redirect()->route('dashboard');      
     }
 
     protected function exChangeUserInfo($response) {
