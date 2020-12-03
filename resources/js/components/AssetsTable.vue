@@ -19,12 +19,12 @@ export default {
   name: 'AssetsTable',
   props: {
   	user: {
-      type: Object,
+      type: String,
   	},
     data: {
       type: Object
     },
-    eve_token: {
+    token: {
       type: String
     },
   },
@@ -59,9 +59,10 @@ export default {
   },
   methods: {
     loadDatatable: function() {
-      axios.get('https://esi.evetech.net/latest/characters/'+this.user.eve_id+'/assets/',{
+      let user = JSON.parse(this.user);
+      axios.get('https://esi.evetech.net/latest/characters/'+user.eve_id+'/assets/',{
         headers: {
-          'Authorization': 'Bearer '+this.eve_token
+          'Authorization': 'Bearer '+this.token
         }
       }).then(response => {
           this.eveData = response.data

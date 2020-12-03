@@ -6,7 +6,7 @@
         <eve-app-sidebar class="sidebar"></eve-app-sidebar>
       </div>
       <div class="column is-three-quarters">
-        <router-view></router-view>
+        <eve-app-content :user="user" :token="token"></eve-app-content>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
     EveAppNavbar,EveAppContent,EveAppSidebar
   },
   name: 'Dashboard',
-  props: ['user','eve_token','image'],
+  props: ['user','token','image'],
   data: function() {
     return {
 

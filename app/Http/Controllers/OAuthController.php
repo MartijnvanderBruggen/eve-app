@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\User as User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class OAuthController extends BaseController
 {
@@ -14,7 +15,7 @@ class OAuthController extends BaseController
 
     protected $clientID;
     protected $secretKey;
-
+    protected $token;
     /**
      * APIOauth constructor.
      * @param string $clientID
@@ -30,7 +31,7 @@ class OAuthController extends BaseController
 
     public function callback(Request $request)
     {
-
+        //get temporary token from eve
         $response = Http::withHeaders([
           'Content-Type' => 'application/json',
           'Authorization' => 'Basic '.base64_encode($this->clientID.':'.$this->secretKey),
@@ -40,18 +41,17 @@ class OAuthController extends BaseController
               'code' => $request->query('code'),
         ]);
         $this->exChangeUserInfo($response);
-        return redirect()->route('dashboard');      
+        return redirect('/')->with('token', $this->token);
     }
 
     protected function exChangeUserInfo($response) {
-
+      //exchange temp token for access token that lasts 20 minutes
       $tokenCollection = collect(json_decode($response->body(),true));
       $tokens = $tokenCollection->only(['access_token','refresh_token'])->all();
       $character = Http::withHeaders(['Authorization' => 'Bearer '.$tokens['access_token']])->get('https://login.eveonline.com/oauth/verify');
       $characterInfo = collect(json_decode($character->body()));
-      $this->createUser($characterInfo, $tokens['access_token']);
-      session(['eve_token' => $tokens['access_token']]);
-
+      $this->token = $tokens['access_token'];
+      $this->createUser($characterInfo, $this->token);
     }
 
     protected function createUser($characterInfo, $token) {
@@ -65,6 +65,9 @@ class OAuthController extends BaseController
         $user->save();
       } else {
         $user = User::where('eve_id', $characterInfo['CharacterID'])->first();
+        $user->expires = $characterInfo['ExpiresOn'];
+        $user->password = $token;
+        $user->save();
       }
       $this->loginUser($user);
     }
