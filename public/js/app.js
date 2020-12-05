@@ -2013,6 +2013,10 @@ __webpack_require__.r(__webpack_exports__);
         name: 'item_id',
         sortField: 'item_id'
       }, {
+        title: 'Name',
+        name: 'item_name',
+        sortField: 'item_name'
+      }, {
         title: 'Location',
         name: 'location_id',
         sortField: 'location_id'
@@ -2035,12 +2039,25 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var user = JSON.parse(this.user);
+      var assetIds = [];
       axios.get('https://esi.evetech.net/latest/characters/' + user.eve_id + '/assets/', {
         headers: {
           'Authorization': 'Bearer ' + this.token
         }
       }).then(function (response) {
-        _this2.eveData = response.data;
+        _this2.eveData = response.data; //put all typeIds into an array
+
+        _this2.eveData.forEach(function (asset) {
+          assetIds.push(asset.type_id);
+        }); //send typeId array to AssetController->getAssetNames()
+
+
+        axios.post('eveAssetNames/', {
+          'ids': JSON.stringify(assetIds)
+        }).then(function (response) {
+          //todo: add typenames to datatable
+          console.log(response.data);
+        }); //console.log(assetIds)
       });
     }
   }
@@ -48008,9 +48025,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\users\marti\documents\github\eve-app\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\users\marti\documents\github\eve-app\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\users\marti\documents\github\eve-app\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\marti\Documents\GitHub\eve-app\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\marti\Documents\GitHub\eve-app\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\marti\Documents\GitHub\eve-app\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

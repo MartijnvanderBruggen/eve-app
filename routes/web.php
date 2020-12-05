@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use App\Models\User as User;
 use App\Http\Controllers\OAuthController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AssetController;
   // code...
 
 
@@ -26,3 +26,4 @@ Route::get('/', function () {
 });
 
 Route::get('callback', [OAuthController::class,'callback']);
+Route::post('eveAssetNames',[AssetController::class,'getAssetNames']);
