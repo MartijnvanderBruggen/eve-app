@@ -13,7 +13,7 @@ export default {
   name: 'AssetsNavbar',
   methods: {
     loadDatatable : function() {
-      this.$root.$emit('loadDatatableEvent','loadDataTable')
+      this.$root.$emit('loadDatatableEvent')
     }
   }
 
