@@ -59,7 +59,7 @@ export default {
   },
 
   mounted() {
-    this.$root.$on('loadDatatableEvent', data => {
+    this.$root.$on('loadDatatableEvent', () => {
         this.loadDatatable()
     });
 
@@ -81,10 +81,22 @@ export default {
           //send typeId array to AssetController->getAssetNames()
           axios.post('eveAssetNames/', {'ids':JSON.stringify(assetIds)} )
           .then( response => {
-            //todo: add typenames to datatable
-            console.log(response.data)
+            //object with all names and type id's
+            let names = response.data
+            //add type name to asset object
+            this.eveData.forEach( asset => {
+              names.forEach( name => {
+                if(asset.type_id == name.typeID) {
+                  asset.item_name = name.typeName
+                }
+              })
+            })
+            this.$nextTick(function() {
+                // this is required because vuetable uses tableFields internally, not fields
+                this.$refs.vuetable.normalizeFields()
+                this.$refs.vuetable.reload()
+            })
           })
-          //console.log(assetIds)
       })
 
 

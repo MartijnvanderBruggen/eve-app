@@ -14,7 +14,7 @@ class AssetController extends BaseController
       $ids = $request->all();
       //turn string into array
       $assetIds = json_decode($ids['ids'],true);
-      $assetNames = DB::table('invTypes')->select('typeName')->whereIn('typeID', $assetIds)->get();
+      $assetNames = DB::table('invTypes')->select('typeName','typeID')->whereIn('typeID', $assetIds)->get();
       return response()->json($assetNames);
     }
 }
